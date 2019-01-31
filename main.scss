@@ -1,0 +1,162 @@
+//
+// Much thanks to Una Kravets --> http://una.im/sass-pixel-art
+//
+
+// Setting the colors we're syncing up with
+$pixel-color-map: (
+        'w': #fff,
+        'k': #000,
+        'o': transparent,
+        'b': #31aefe
+);
+
+// Size of the pixels
+$pixel-size: 1px !default;
+
+// Mario pixel art matrices!
+$small-cloud: (
+                (o o o o o o o o o o o o o o k k k k o o o o o o o o o o o o o o)
+                (o o o o o o o o o o o o o k w w w w k o o o o o o o o o o o o o)
+                (o o o o o o o o o o o k k w w w w w w k o o o o o o o o o o o o)
+                (o o o o o o o o o o k w w w w w w w w k o k o o o o o o o o o o)
+                (o o o o o o o o o o k w w w w w w w w w k w k o o o o o o o o o)
+                (o o o o o o o o o o k w w w w w w b w w w w w k o o o o o o o o)
+                (o o o o o o o o o k w w w b b w w w b w w w w k o o o o o o o o)
+                (o o o o o o o o k w w w b w w w w w w w w w w k o o o o o o o o)
+                (o o o o o k k k w w w w w w w w w w w w w w w w k o o k o o o o)
+                (o o o o k w w w w w w w w w w w w w w w w w w w k o k w k o o o)
+                (o o o k w w w w w w w w w w w w w w w w w w w w w k w w k o o o)
+                (o o o w w w w w w w w w w w w w w w w w w w w w w w w w k o k o)
+                (o k k w w w w w w w w w w w w w w w w w w w w w w w w w w k w k)
+                (k w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w k)
+                (k w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w k)
+                (o k w w w w w w w w w w w w w w w w w w w w w w w w w w w w k o)
+                (o o k w w b w w w w w w w w w w w b w w w w w w w w w w w k o o)
+                (o o o k w w b w w b w w w w w w b w w w w w w w w w w w w w k o)
+                (o o o o k w w b b b b w w w b b b b w w w w b w w w w w w w w k)
+                (o o o o k w w w w w b b b b b b w b b b b b w w w w w w w w w o)
+                (o o o o o k k k w w w w b b w w w w b b b w w w w w w w w k k o)
+                (o o o o o o o o k w w w w w w k w w w w w w w w k w w k k o o o)
+                (o o o o o o o o o k k w w w k o k k w w w w k k o k k o o o o o)
+                (o o o o o o o o o o o k k k o o o o k k k k o o o o o o o o o o));
+
+$big-cloud: (
+                (o o o o o o o o o o o o o o k k k k o o o o o o o o o o o o k k k k o o o o o o o o o o o o o o)
+                (o o o o o o o o o o o o o k w w w w k o o o o o o o o o o k w w w w k o o o o o o o o o o o o o)
+                (o o o o o o o o o o o k k w w w w w w k o o o o o o o k k w w w w w w k o o o o o o o o o o o o)
+                (o o o o o o o o o o k w w w w w w w w k o k o o o o k w w w w w w w w k o k o o o o o o o o o o)
+                (o o o o o o o o o o k w w w w w w w w w k w k o o o k w w w w w w w w w k w k o o o o o o o o o)
+                (o o o o o o o o o o k w w w w w w b w w w w w k o o k w w w w w w b w w w w w k o o o o o o o o)
+                (o o o o o o o o o k w w w b b w w w b w w w w k o k w w w b b w w w b w w w w k o o o o o o o o)
+                (o o o o o o o o k w w w b w w w w w w w w w w k k w w w b w w w w w w w w w w k o o o o o o o o)
+                (o o o o o k k k w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w k o o k o o o o)
+                (o o o o k w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w k o k w k o o o)
+                (o o o k w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w k w w k o o o)
+                (o o o w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w k o k o)
+                (o k k w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w k w k)
+                (k w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w k)
+                (k w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w k)
+                (o k w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w k o)
+                (o o k w w b w w w w w w w w w w w b w w w w w w w w w w w w w w w b w w w w w w w w w w w k o o)
+                (o o o k w w b w w b w w w w w w b w w w w w w w w b w w w w w w b w w w w w w w w w w w w w k o)
+                (o o o o k w w b b b b w w w b b b b w w w w b w b b b w w w b b b b w w w w b w w w w w w w w k)
+                (o o o o k w w w w w b b b b b b w b b b b b w w w w b b b b b b w b b b b b w w w w w w w w w o)
+                (o o o o o k k k w w w w b b w w w w b b b w w w w w w w b b w w w w b b b w w w w w w w w k k o)
+                (o o o o o o o o k w w w w w w k w w w w w w w w k w w w w w w k w w w w w w w w k w w k k o o o)
+                (o o o o o o o o o k k w w w k o k k w w w w k k o k k w w w k o k k w w w w k k o k k o o o o o)
+                (o o o o o o o o o o o k k k o o o o k k k k o o o o o k k k o o o o k k k k o o o o o o o o o o));
+
+$bigg-cloud: (
+                (o o o o o o o o o o o o o o k k k k o o o o o o o o o o o o k k k k o o o o o o o o o o o o k k k k o o o o o o o o o o o o o o)
+                (o o o o o o o o o o o o o k w w w w k o o o o o o o o o o k w w w w k o o o o o o o o o o k w w w w k o o o o o o o o o o o o o)
+                (o o o o o o o o o o o k k w w w w w w k o o o o o o o k k w w w w w w k o o o o o o o k k w w w w w w k o o o o o o o o o o o o)
+                (o o o o o o o o o o k w w w w w w w w k o k o o o o k w w w w w w w w k o k o o o o k w w w w w w w w k o k o o o o o o o o o o)
+                (o o o o o o o o o o k w w w w w w w w w k w k o o o k w w w w w w w w w k w k o o o k w w w w w w w w w k w k o o o o o o o o o)
+                (o o o o o o o o o o k w w w w w w b w w w w w k o o k w w w w w w b w w w w w k o o k w w w w w w b w w w w w k o o o o o o o o)
+                (o o o o o o o o o k w w w b b w w w b w w w w k o k w w w b b w w w b w w w w k o k w w w b b w w w b w w w w k o o o o o o o o)
+                (o o o o o o o o k w w w b w w w w w w w w w w k k w w w b w w w w w w w w w w k k w w w b w w w w w w w w w w k o o o o o o o o)
+                (o o o o o k k k w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w k o o k o o o o)
+                (o o o o k w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w k o k w k o o o)
+                (o o o k w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w k w w k o o o)
+                (o o o w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w k o k o)
+                (o k k w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w k w k)
+                (k w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w k)
+                (k w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w k)
+                (o k w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w w k o)
+                (o o k w w b w w w w w w w w w w w b w w w w w w w w w w w w w w w b w w w w w w w w w w w w w w w b w w w w w w w w w w w k o o)
+                (o o o k w w b w w b w w w w w w b w w w w w w w w b w w w w w w b w w w w w w w w b w w w w w w b w w w w w w w w w w w w w k o)
+                (o o o o k w w b b b b w w w b b b b w w w w b w b b b w w w b b b b w w w w b w b b b w w w b b b b w w w w b w w w w w w w w k)
+                (o o o o k w w w w w b b b b b b w b b b b b w w w w b b b b b b w b b b b b w w w w b b b b b b w b b b b b w w w w w w w w w o)
+                (o o o o o k k k w w w w b b w w w w b b b w w w w w w w b b w w w w b b b w w w w w w w b b w w w w b b b w w w w w w w w k k o)
+                (o o o o o o o o k w w w w w w k w w w w w w w w k w w w w w w k w w w w w w w w k w w w w w w k w w w w w w w w k w w k k o o o)
+                (o o o o o o o o o k k w w w k o k k w w w w k k o k k w w w k o k k w w w w k k o k k w w w k o k k w w w w k k o k k o o o o o)
+                (o o o o o o o o o o o k k k o o o o k k k k o o o o o k k k o o o o k k k k o o o o o k k k o o o o k k k k o o o o o o o o o o));
+
+// Function to read the matrix and pixelize it!
+@function pixelize($matrix, $size){
+        $l: length($matrix); // length of the entire
+        $sh: ''; // shadows list
+        $i: $l; // length of the line
+
+        // read through the length of the matrix and decide on the box shadow color and position
+        @for $i from 1 through $l{
+                $row: nth($matrix,$i); //
+
+                @for $j from 1 through length($row){
+                        $item: nth($row,$j);
+
+                        @if map-has-key($pixel-color-map, $item) {
+                                $sh:  $sh + ($j*$size) + ' ' + ($i*$size) + ' ' + map-get($pixel-color-map, $item);
+                        } @else {
+                                @warn 'there is no color specified in "$pixel-color-map" for: "#{$item}"';
+                        }
+
+                        @if not ($j == length($row) and $i == $l) {
+                                $sh: $sh + ',';
+                        }
+                }
+        }
+
+        @return unquote($sh);
+}
+
+// Mixin to style each item
+@mixin style-item($matrix, $size){
+        position: absolute; // pixels stack next to each other
+        // set width & height of icon based on size of pixels
+        width:($size * length(nth($matrix,1)));
+        height:($size * length($matrix));
+
+        &:after{
+                content: '';
+
+                // position everything from the top left corner
+                position: absolute;
+                top: (-$size);
+                left: (-$size);
+                width: $size;
+                height: $size;
+
+                // this is where we make the stitch
+                box-shadow: pixelize($matrix,$size);
+        }
+}
+
+// Page styling
+body {
+        background: #6c8cfc;
+        overflow:hidden;
+}
+
+.cloud-bigg {
+        @include style-item($bigg-cloud, $pixel-size);
+}
+
+.cloud-big {
+        @include style-item($big-cloud, $pixel-size);
+}
+
+.cloud-small {
+        @include style-item($small-cloud, $pixel-size);
+}
+
